@@ -28,6 +28,12 @@
 
 ---
 
+## Requirements
+
+- PHP 8.2+
+
+---
+
 ## 📦 Installation
 
 ```bash
