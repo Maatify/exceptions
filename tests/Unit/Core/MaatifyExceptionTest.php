@@ -11,10 +11,14 @@ use Maatify\Exceptions\Contracts\EscalationPolicyInterface;
 use Maatify\Exceptions\Enum\ErrorCategoryEnum;
 use Maatify\Exceptions\Enum\ErrorCodeEnum;
 use Maatify\Exceptions\Exception\MaatifyException;
+use Maatify\Exceptions\Policy\DefaultErrorPolicy;
+use Maatify\Exceptions\Policy\DefaultEscalationPolicy;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(MaatifyException::class)]
+#[CoversClass(DefaultErrorPolicy::class)]
+#[CoversClass(DefaultEscalationPolicy::class)]
 final class MaatifyExceptionTest extends TestCase
 {
     private function createConcreteException(

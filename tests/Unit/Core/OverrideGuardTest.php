@@ -8,10 +8,12 @@ use LogicException;
 use Maatify\Exceptions\Contracts\ErrorCodeInterface;
 use Maatify\Exceptions\Enum\ErrorCodeEnum;
 use Maatify\Exceptions\Exception\Validation\ValidationMaatifyException;
+use Maatify\Exceptions\Policy\DefaultErrorPolicy;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(MaatifyException::class)]
+#[CoversClass(DefaultErrorPolicy::class)]
 final class OverrideGuardTest extends TestCase
 {
     private function createValidationException(

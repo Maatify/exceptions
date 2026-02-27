@@ -26,9 +26,31 @@ use Maatify\Exceptions\Exception\Unsupported\UnsupportedMaatifyException;
 use Maatify\Exceptions\Exception\Unsupported\UnsupportedOperationMaatifyException;
 use Maatify\Exceptions\Exception\Validation\InvalidArgumentMaatifyException;
 use Maatify\Exceptions\Exception\Validation\ValidationMaatifyException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(AuthenticationMaatifyException::class)]
+#[CoversClass(SessionExpiredMaatifyException::class)]
+#[CoversClass(AuthorizationMaatifyException::class)]
+#[CoversClass(ForbiddenMaatifyException::class)]
+#[CoversClass(BusinessRuleMaatifyException::class)]
+#[CoversClass(ConflictMaatifyException::class)]
+#[CoversClass(GenericConflictMaatifyException::class)]
+#[CoversClass(EntityInUseMaatifyException::class)]
+#[CoversClass(MaatifyException::class)]
+#[CoversClass(NotFoundMaatifyException::class)]
+#[CoversClass(ResourceNotFoundMaatifyException::class)]
+#[CoversClass(RateLimitMaatifyException::class)]
+#[CoversClass(TooManyRequestsMaatifyException::class)]
+#[CoversClass(SystemMaatifyException::class)]
+#[CoversClass(DatabaseConnectionMaatifyException::class)]
+#[CoversClass(UnsupportedMaatifyException::class)]
+#[CoversClass(UnsupportedOperationMaatifyException::class)]
+#[CoversClass(ValidationMaatifyException::class)]
+#[CoversClass(InvalidArgumentMaatifyException::class)]
+#[CoversClass(ErrorCategoryEnum::class)]
+#[CoversClass(ErrorCodeEnum::class)]
 final class ExceptionFamiliesTest extends TestCase
 {
     /**

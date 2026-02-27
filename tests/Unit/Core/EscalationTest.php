@@ -12,10 +12,12 @@ use Maatify\Exceptions\Exception\BusinessRule\BusinessRuleMaatifyException;
 use Maatify\Exceptions\Exception\MaatifyException;
 use Maatify\Exceptions\Exception\System\DatabaseConnectionMaatifyException;
 use Maatify\Exceptions\Exception\Validation\InvalidArgumentMaatifyException;
+use Maatify\Exceptions\Policy\DefaultEscalationPolicy;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(MaatifyException::class)]
+#[CoversClass(DefaultEscalationPolicy::class)]
 final class EscalationTest extends TestCase
 {
     private function createBusinessException(?\Throwable $previous = null): MaatifyException
