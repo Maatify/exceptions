@@ -11,12 +11,12 @@ use Maatify\Exceptions\Contracts\ErrorCodeInterface;
 use Maatify\Exceptions\Contracts\ErrorPolicyInterface;
 use Maatify\Exceptions\Contracts\EscalationPolicyInterface;
 use Maatify\Exceptions\Exception\MaatifyException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-/**
- * @covers \Maatify\Exceptions\Application\Error\DefaultThrowableToError
- */
+#[CoversClass(\Maatify\Exceptions\Application\Error\DefaultThrowableToError::class)]
+
 final class DefaultThrowableToErrorTest extends TestCase
 {
     private DefaultThrowableToError $mapper;

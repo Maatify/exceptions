@@ -7,11 +7,11 @@ namespace Maatify\Exceptions\Tests\Unit\Application\Format;
 use Maatify\Exceptions\Application\Error\ErrorContext;
 use Maatify\Exceptions\Application\Error\NormalizedError;
 use Maatify\Exceptions\Application\Format\JsonErrorFormatter;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Maatify\Exceptions\Application\Format\JsonErrorFormatter
- */
+#[CoversClass(\Maatify\Exceptions\Application\Format\JsonErrorFormatter::class)]
+
 final class JsonErrorFormatterTest extends TestCase
 {
     private JsonErrorFormatter $formatter;

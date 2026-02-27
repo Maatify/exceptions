@@ -8,11 +8,10 @@ use Maatify\Exceptions\Application\Error\ErrorContext;
 use Maatify\Exceptions\Application\Error\NormalizedError;
 use Maatify\Exceptions\Application\Format\JsonErrorFormatter;
 use Maatify\Exceptions\Application\Format\ProblemDetailsFormatter;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @coversNothing
- */
+#[CoversNothing]
 final class DeterminismTest extends TestCase
 {
     public function testJsonDeterminism(): void

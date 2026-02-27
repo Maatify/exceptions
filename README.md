@@ -23,6 +23,8 @@
 *   **Strict Taxonomy:** Exceptions are categorized into 9 distinct families (System, Validation, Auth, etc.) backed by `ErrorCategoryEnum`.
 *   **Guarded Overrides:** Prevents developers from accidentally mismatching error codes or HTTP statuses.
 *   **Escalation Protection:** Automatically escalates severity when a critical exception is wrapped in a lighter one (e.g., a Database failure wrapped in a generic runtime exception will typically retain 500 status).
+*   **Error Serialization:** Transforms any `Throwable` into a standardized, deterministic JSON response suitable for APIs.
+*   **RFC7807 Support:** Built-in formatter for "Problem Details for HTTP APIs" compliance.
 *   **Zero Dependencies:** Pure PHP implementation. No framework coupling.
 *   **PSR-4 Compliant:** Ready for immediate Composer autoloading.
 
@@ -82,6 +84,32 @@ try {
 // This ensures monitoring tools see the root cause (System Failure), not a generic Business Rule error.
 ```
 
+### Error Serialization
+
+Convert any exception into a ready-to-send API response:
+
+```php
+use Maatify\Exceptions\Application\Error\ErrorSerializer;
+use Maatify\Exceptions\Application\Error\DefaultThrowableToError;
+use Maatify\Exceptions\Application\Format\JsonErrorFormatter;
+
+$serializer = new ErrorSerializer(
+    new DefaultThrowableToError(),
+    new JsonErrorFormatter()
+);
+
+try {
+    // ... application logic
+} catch (\Throwable $t) {
+    $response = $serializer->serialize($t);
+    
+    // Send to client
+    http_response_code($response->getStatus());
+    header('Content-Type: ' . $response->getContentType());
+    echo json_encode($response->getBody());
+}
+```
+
 ---
 
 ## 📚 Documentation
@@ -109,6 +137,7 @@ Detailed documentation is available in the [BOOK/](BOOK/) directory:
 *   **Category Immutability:** An exception's category is defined by its class and cannot be overridden at runtime.
 *   **Status Class Safety:** You cannot force a 4xx exception to return a 5xx status code manually, or vice versa.
 *   **Escalation Determinism:** Severity calculation is deterministic and side-effect free.
+*   **Serialization Determinism:** The same input Throwable and Context will always yield the exact same output.
 
 ---
 

@@ -10,12 +10,12 @@ use Maatify\Exceptions\Application\Error\ErrorSerializer;
 use Maatify\Exceptions\Application\Error\NormalizedError;
 use Maatify\Exceptions\Application\Error\ThrowableToErrorInterface;
 use Maatify\Exceptions\Application\Format\FormatterInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-/**
- * @covers \Maatify\Exceptions\Application\Error\ErrorSerializer
- */
+#[CoversClass(\Maatify\Exceptions\Application\Error\ErrorSerializer::class)]
+
 final class ErrorSerializerTest extends TestCase
 {
     private ThrowableToErrorInterface $mapper;

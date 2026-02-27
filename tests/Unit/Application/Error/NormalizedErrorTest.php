@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Maatify\Exceptions\Tests\Unit\Application\Error;
 
 use Maatify\Exceptions\Application\Error\NormalizedError;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Maatify\Exceptions\Application\Error\NormalizedError
- */
+#[CoversClass(\Maatify\Exceptions\Application\Error\NormalizedError::class)]
+
 final class NormalizedErrorTest extends TestCase
 {
     public function testConstructionIntegrity(): void

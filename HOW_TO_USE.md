@@ -128,3 +128,53 @@ function handleException(ApiAwareExceptionInterface $e)
     // Log structured error...
 }
 ```
+
+---
+
+## 5️⃣ Using Error Serialization (Recommended)
+
+Instead of manually formatting JSON, use the `ErrorSerializer` to ensure safe, consistent, and deterministic output.
+
+### Setup
+
+```php
+use Maatify\Exceptions\Application\Error\DefaultThrowableToError;
+use Maatify\Exceptions\Application\Error\ErrorContext;
+use Maatify\Exceptions\Application\Error\ErrorSerializer;
+use Maatify\Exceptions\Application\Format\JsonErrorFormatter;
+use Maatify\Exceptions\Application\Format\ProblemDetailsFormatter;
+
+// 1. Choose your formatter (Standard JSON or RFC7807)
+$formatter = new JsonErrorFormatter(); 
+// OR
+// $formatter = new ProblemDetailsFormatter();
+
+// 2. Initialize the serializer
+$serializer = new ErrorSerializer(
+    new DefaultThrowableToError(),
+    $formatter
+);
+```
+
+### Handling Exceptions
+
+```php
+try {
+    // Application Code
+} catch (Throwable $e) {
+    // 3. Create context (optional trace ID, debug mode)
+    $context = new ErrorContext(traceId: 'req_123');
+
+    // 4. Serialize
+    $response = $serializer->serialize($e, $context);
+
+    // 5. Output
+    http_response_code($response->getStatus());
+    foreach ($response->getHeaders() as $name => $value) {
+        header("$name: $value");
+    }
+    header('Content-Type: ' . $response->getContentType());
+    
+    echo json_encode($response->getBody());
+}
+```

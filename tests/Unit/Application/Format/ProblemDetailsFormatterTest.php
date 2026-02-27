@@ -7,11 +7,11 @@ namespace Maatify\Exceptions\Tests\Unit\Application\Format;
 use Maatify\Exceptions\Application\Error\ErrorContext;
 use Maatify\Exceptions\Application\Error\NormalizedError;
 use Maatify\Exceptions\Application\Format\ProblemDetailsFormatter;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Maatify\Exceptions\Application\Format\ProblemDetailsFormatter
- */
+#[CoversClass(\Maatify\Exceptions\Application\Format\ProblemDetailsFormatter::class)]
 final class ProblemDetailsFormatterTest extends TestCase
 {
     private ProblemDetailsFormatter $formatter;
@@ -87,9 +87,7 @@ final class ProblemDetailsFormatterTest extends TestCase
         $this->assertArrayNotHasKey('instance', $body);
     }
 
-    /**
-     * @dataProvider categoryTitleProvider
-     */
+    #[DataProvider('categoryTitleProvider')]
     public function testTitleMapping(string $category, string $expectedTitle): void
     {
         $error = new NormalizedError('C', 'M', 400, $category, false, true, []);
