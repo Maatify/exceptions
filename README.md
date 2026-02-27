@@ -112,6 +112,17 @@ Detailed documentation is available in the [BOOK/](BOOK/) directory:
 
 ---
 
+## ✅ Quality Status
+
+- PHP 8.2+
+- PHPUnit 11
+- 100% Code Coverage
+- Zero Warnings
+- Immutable Exception Design
+- Deterministic Escalation & Policy Engine
+
+---
+
 ## 🪪 License
 
 This library is licensed under the **MIT License**.  
