@@ -37,7 +37,6 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(BusinessRuleMaatifyException::class)]
 #[CoversClass(ConflictMaatifyException::class)]
 #[CoversClass(GenericConflictMaatifyException::class)]
-#[CoversClass(EntityInUseMaatifyException::class)]
 #[CoversClass(MaatifyException::class)]
 #[CoversClass(NotFoundMaatifyException::class)]
 #[CoversClass(ResourceNotFoundMaatifyException::class)]

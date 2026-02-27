@@ -10,7 +10,6 @@ use Maatify\Exceptions\Enum\ErrorCodeEnum;
 use Maatify\Exceptions\Exception\Authentication\SessionExpiredMaatifyException;
 use Maatify\Exceptions\Exception\Authorization\ForbiddenMaatifyException;
 use Maatify\Exceptions\Exception\Conflict\GenericConflictMaatifyException;
-use Maatify\Exceptions\Exception\Conflict\EntityInUseMaatifyException;
 use Maatify\Exceptions\Exception\MaatifyException;
 use Maatify\Exceptions\Exception\NotFound\ResourceNotFoundMaatifyException;
 use Maatify\Exceptions\Exception\RateLimit\TooManyRequestsMaatifyException;
