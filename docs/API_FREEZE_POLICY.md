@@ -175,6 +175,43 @@ Breaking determinism = breaking change.
 
 ---
 
+## 7.1 Determinism Boundary & Extension Responsibility
+
+The library guarantees deterministic behavior for all **shipped components**, including:
+
+* DefaultThrowableToError
+* JsonErrorFormatter
+* ProblemDetailsFormatter
+* ErrorSerializer
+* All Value Objects
+
+Determinism means:
+
+* Same Throwable + Same Context → identical output
+* No randomness
+* No timestamps
+* No environment-based branching
+* No stack trace exposure
+
+However, the following are **outside the deterministic guarantee of the library**:
+
+* Custom implementations of `ThrowableToErrorInterface`
+* Custom implementations of `FormatterInterface`
+* Application-provided `meta` data
+
+The library guarantees deterministic **transformation of input**.
+It does not guarantee deterministic **input provided by the application**.
+
+Custom extensions must preserve:
+
+* Safety
+* Determinism
+* JSON contract stability
+
+Failure to do so constitutes misuse of the extension surface, not a defect in the kernel.
+
+---
+
 # 8️⃣ Extension Rules
 
 All extension mechanisms must:
