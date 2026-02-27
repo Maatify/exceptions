@@ -10,6 +10,7 @@ use Maatify\Exceptions\Enum\ErrorCategoryEnum;
 use Maatify\Exceptions\Enum\ErrorCodeEnum;
 use Maatify\Exceptions\Exception\Authentication\AuthenticationMaatifyException;
 use Maatify\Exceptions\Exception\Authentication\SessionExpiredMaatifyException;
+use Maatify\Exceptions\Exception\Authentication\UnauthorizedMaatifyException;
 use Maatify\Exceptions\Exception\Authorization\AuthorizationMaatifyException;
 use Maatify\Exceptions\Exception\Authorization\ForbiddenMaatifyException;
 use Maatify\Exceptions\Exception\BusinessRule\BusinessRuleMaatifyException;
@@ -20,6 +21,7 @@ use Maatify\Exceptions\Exception\NotFound\NotFoundMaatifyException;
 use Maatify\Exceptions\Exception\NotFound\ResourceNotFoundMaatifyException;
 use Maatify\Exceptions\Exception\RateLimit\RateLimitMaatifyException;
 use Maatify\Exceptions\Exception\RateLimit\TooManyRequestsMaatifyException;
+use Maatify\Exceptions\Exception\Security\SecurityMaatifyException;
 use Maatify\Exceptions\Exception\System\DatabaseConnectionMaatifyException;
 use Maatify\Exceptions\Exception\System\SystemMaatifyException;
 use Maatify\Exceptions\Exception\Unsupported\UnsupportedMaatifyException;
@@ -32,6 +34,7 @@ use PHPUnit\Framework\TestCase;
 
 #[CoversClass(AuthenticationMaatifyException::class)]
 #[CoversClass(SessionExpiredMaatifyException::class)]
+#[CoversClass(UnauthorizedMaatifyException::class)]
 #[CoversClass(AuthorizationMaatifyException::class)]
 #[CoversClass(ForbiddenMaatifyException::class)]
 #[CoversClass(BusinessRuleMaatifyException::class)]
@@ -42,6 +45,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(ResourceNotFoundMaatifyException::class)]
 #[CoversClass(RateLimitMaatifyException::class)]
 #[CoversClass(TooManyRequestsMaatifyException::class)]
+#[CoversClass(SecurityMaatifyException::class)]
 #[CoversClass(SystemMaatifyException::class)]
 #[CoversClass(DatabaseConnectionMaatifyException::class)]
 #[CoversClass(UnsupportedMaatifyException::class)]
@@ -116,6 +120,14 @@ final class ExceptionFamiliesTest extends TestCase
                 ErrorCategoryEnum::AUTHENTICATION,
                 401,
                 ErrorCodeEnum::SESSION_EXPIRED,
+                true,
+                false
+            ],
+            'Authentication: Unauthorized' => [
+                UnauthorizedMaatifyException::class,
+                ErrorCategoryEnum::AUTHENTICATION,
+                401,
+                ErrorCodeEnum::UNAUTHORIZED,
                 true,
                 false
             ],
@@ -199,6 +211,16 @@ final class ExceptionFamiliesTest extends TestCase
                 ErrorCodeEnum::TOO_MANY_REQUESTS,
                 true,
                 true
+            ],
+            'Security: Generic' => [
+                get_class(new class extends SecurityMaatifyException {
+                    protected function defaultErrorCode(): ErrorCodeInterface { return ErrorCodeEnum::FORBIDDEN; }
+                }),
+                ErrorCategoryEnum::SECURITY,
+                403,
+                ErrorCodeEnum::FORBIDDEN,
+                true,
+                false
             ],
             'Unsupported: Generic' => [
                 get_class(new class extends UnsupportedMaatifyException {

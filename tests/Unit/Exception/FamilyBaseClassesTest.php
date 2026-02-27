@@ -13,6 +13,7 @@ use Maatify\Exceptions\Exception\BusinessRule\BusinessRuleMaatifyException;
 use Maatify\Exceptions\Exception\Conflict\ConflictMaatifyException;
 use Maatify\Exceptions\Exception\NotFound\NotFoundMaatifyException;
 use Maatify\Exceptions\Exception\RateLimit\RateLimitMaatifyException;
+use Maatify\Exceptions\Exception\Security\SecurityMaatifyException;
 use Maatify\Exceptions\Exception\System\SystemMaatifyException;
 use Maatify\Exceptions\Exception\Unsupported\UnsupportedMaatifyException;
 use Maatify\Exceptions\Exception\Validation\ValidationMaatifyException;
@@ -25,6 +26,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(ConflictMaatifyException::class)]
 #[CoversClass(NotFoundMaatifyException::class)]
 #[CoversClass(RateLimitMaatifyException::class)]
+#[CoversClass(SecurityMaatifyException::class)]
 #[CoversClass(SystemMaatifyException::class)]
 #[CoversClass(UnsupportedMaatifyException::class)]
 #[CoversClass(ValidationMaatifyException::class)]
@@ -123,6 +125,16 @@ final class FamilyBaseClassesTest extends TestCase
         };
         $this->assertSame(ErrorCategoryEnum::UNSUPPORTED, $exception->getCategory());
         $this->assertSame(409, $exception->getHttpStatus());
+        $this->assertTrue($exception->isSafe());
+    }
+
+    public function testSecurityMaatifyExceptionDefaults(): void
+    {
+        $exception = new class extends SecurityMaatifyException {
+            protected function defaultErrorCode(): ErrorCodeInterface { return ErrorCodeEnum::FORBIDDEN; }
+        };
+        $this->assertSame(ErrorCategoryEnum::SECURITY, $exception->getCategory());
+        $this->assertSame(403, $exception->getHttpStatus());
         $this->assertTrue($exception->isSafe());
     }
 }

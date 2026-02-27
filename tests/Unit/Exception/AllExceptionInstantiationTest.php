@@ -8,6 +8,7 @@ use Maatify\Exceptions\Contracts\ErrorCodeInterface;
 use Maatify\Exceptions\Enum\ErrorCategoryEnum;
 use Maatify\Exceptions\Enum\ErrorCodeEnum;
 use Maatify\Exceptions\Exception\Authentication\SessionExpiredMaatifyException;
+use Maatify\Exceptions\Exception\Authentication\UnauthorizedMaatifyException;
 use Maatify\Exceptions\Exception\Authorization\ForbiddenMaatifyException;
 use Maatify\Exceptions\Exception\Conflict\GenericConflictMaatifyException;
 use Maatify\Exceptions\Exception\MaatifyException;
@@ -21,6 +22,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(SessionExpiredMaatifyException::class)]
+#[CoversClass(UnauthorizedMaatifyException::class)]
 #[CoversClass(ForbiddenMaatifyException::class)]
 #[CoversClass(GenericConflictMaatifyException::class)]
 #[CoversClass(ResourceNotFoundMaatifyException::class)]
@@ -36,6 +38,7 @@ final class AllExceptionInstantiationTest extends TestCase
     public static function exceptionClassProvider(): iterable
     {
         yield 'SessionExpired' => [SessionExpiredMaatifyException::class];
+        yield 'Unauthorized' => [UnauthorizedMaatifyException::class];
         yield 'Forbidden' => [ForbiddenMaatifyException::class];
         yield 'Conflict' => [GenericConflictMaatifyException::class];
         yield 'ResourceNotFound' => [ResourceNotFoundMaatifyException::class];
